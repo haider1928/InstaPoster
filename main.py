@@ -27,7 +27,10 @@ def edit_image(text, size, x, y, imagepath):
     draw = ImageDraw.Draw(image)
 
     # Define the text and font
-    font = ImageFont.truetype("arial.ttf", size)
+    try:
+        font = ImageFont.truetype("arial.ttf", size)
+    except IOError:
+        font = ImageFont.load_default()
 
     # Define text position
     position = (x, y)
