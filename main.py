@@ -61,12 +61,6 @@ with open("headlines.txt", 'r+') as headlines_txt:
         ind += 1
 
 bot = instagrapi.Client()
-while True:
-    login = bot.login("wreck._.it._.ralph", "haiderchangedit@1")
-    if login == True:
-        post = bot.photo_upload("output_image.jpg", f"{headline}")
-        
-    else:
-        sleep(1000)
 
-    sleep(5)
+login = bot.login("wreck._.it._.ralph", "haiderchangedit@1")
+sleep(2*60*60)
