@@ -56,9 +56,9 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
             break
         if headline not in existing_headlines and len(headline) <= 100:
             # Process and save the headline
-            edit_image(headline, 35, 350, 1002, "your_image.jpg")  # Headline editor
-            edit_image("WRECK NEWS", 43, 15, 1000, "output_image.jpg")
-            edit_image(add_newlines(description or "No description available.", 40), 60, 340, 150, "output_image.jpg")
+            edit_image(headline, 100, 350, 1002, "your_image.jpg")  # Headline editor
+            edit_image("WRECK NEWS", 120, 15, 1000, "output_image.jpg")
+            edit_image(add_newlines(description or "No description available.", 40), 200, 340, 150, "output_image.jpg")
             headlines_txt.write(f"{headline}\n")
             break
         ind += 1
@@ -67,4 +67,4 @@ bot = instagrapi.Client()
 
 login = bot.login("wreck._.it._.ralph", "haiderchangedit@1")
 post = bot.photo_upload("output_image.jpg", f"{headline}")
-bot.logout
+bot.logout()
