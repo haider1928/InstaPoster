@@ -1,0 +1,25 @@
+name: Run Python Script Every 2 Hours
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"  # Runs every 2 hours (UTC time)
+  workflow_dispatch:  # Allows manual execution
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Pulls the latest code from your repo
+
+      - name: Set Up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"  # Adjust Python version if needed
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt  # Installs required Python packages
+
+      - name: Run Python Script
+        run: python main.py  # Executes your script
