@@ -1,7 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont 
 from newsapi import NewsApiClient
 import instagrapi
-from time import sleep
 def add_newlines(text, interval):
     # Split the text into chunks of the specified interval
     chunks = [text[i:i+interval] for i in range(0, len(text), interval)]
@@ -41,7 +40,8 @@ def edit_image(text, size, x, y, imagepath):
 
 # Read headlines from the file
 
-with open("headlines.txt", 'r+') as headlines_txt:
+with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines_txt:
+
     existing_headlines = headlines_txt.read().splitlines()
     ind = 0
 
@@ -63,4 +63,5 @@ with open("headlines.txt", 'r+') as headlines_txt:
 bot = instagrapi.Client()
 
 login = bot.login("wreck._.it._.ralph", "haiderchangedit@1")
-sleep(2*60*60)
+post = bot.photo_upload("output_image.jpg", f"{headline}")
+bot.logout
