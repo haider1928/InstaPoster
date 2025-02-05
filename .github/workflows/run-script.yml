@@ -1,4 +1,4 @@
-name: Run Python Script Every 2 Hours
+name: Post on Insta a news every 2 Hours
 
 on:
   schedule:
