@@ -1,10 +1,10 @@
 from image_editor import edit_image
-from news import get_news
+from news import getnews
 import instagrapi
 from data_enhancer import add_newlines
 from instagram_logger import login, logout
 # Read headlines from the file
-
+news_api_key = open("newsapikey.txt", 'r').read()
 with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines_txt:
 
     existing_headlines = headlines_txt.read().splitlines()
@@ -12,7 +12,7 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
 
     # Fetch news and check if it's already in the file
     while True:
-        headline, description = get_news(ind)
+        headline, description = getnews(ind, news_api_key)
         if headline is None:
             print("No more headlines available.")
             break
