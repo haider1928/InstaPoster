@@ -28,7 +28,7 @@ def get_hadith():
 
     if hadiths:
         random_hadith = random.choice(hadiths).text.strip()
-        return random_hadith
+        return random_hadith, url
     else:
         print("No Hadith found. Check the URL or page range.")
 

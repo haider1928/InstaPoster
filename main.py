@@ -28,12 +28,18 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
             headlines_txt.write(f"{headline}\n")
             break
         ind += 1
-hadith = get_hadith()
+while True:
+    hadith, url = get_hadith()
+    if len(hadith) > 360:
+        hadith, url = get_hadith()
+    else:
+        break
+
 hadith = add_newlines(hadith, 46)
 edit_image(hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
 bot = instagrapi.Client()
 #bot = login(username.strip(), password.strip())
 bot = login_by_session_id(session_id_insta)
 post = bot.photo_upload("output_image.jpg", f"{headline}")
-post = bot.photo_upload("output_hadith.jpg", f"|| {hadith} ||")
+post = bot.photo_upload("output_hadith.jpg", f"{url} || {hadith} ||")
 #status = logout(bot=bot)
