@@ -65,6 +65,6 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
 
 bot = instagrapi.Client()
 
-login = bot.login("wreck._.it._.ralph", "haiderchangedit@1")
+login = bot.login("wreck._.it._.ralph", "vapoursaintgood@1")
 post = bot.photo_upload("output_image.jpg", f"{headline}")
 bot.logout()
