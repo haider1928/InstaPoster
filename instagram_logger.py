@@ -12,7 +12,7 @@ def login_by_session_id(session_id):
     if session_id:
         bot = instagrapi.Client()
         status = bot.login_by_sessionid(sessionid=session_id)
-        return bot
+        return status
     
 
 def logout(bot):

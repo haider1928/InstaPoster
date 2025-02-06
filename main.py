@@ -37,8 +37,11 @@ while True:
 
 hadith = add_newlines(hadith, 46)
 edit_image(hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
-
-bot = login(username.strip(), password.strip())
+st = login_by_session_id(session_id_insta)
+if st is True:
+    pass
+else:
+    bot = login(username.strip(), password.strip())
 
 post1 = upload_media("output_image.jpg", f"{headline}", bot)
 post2 = upload_media("output_hadith.jpg", f"{url}",bot)
