@@ -18,3 +18,7 @@ def login_by_session_id(session_id):
 def logout(bot):
     status = bot.logout()
     return status
+
+def upload_media(media_path, caption, bot):
+    status = bot.photo_upload(media_path, caption)
+    return status

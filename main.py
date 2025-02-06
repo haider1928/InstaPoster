@@ -1,8 +1,8 @@
 from image_editor import edit_image
 from news import getnews
-import instagrapi
+
 from data_enhancer import add_newlines
-from instagram_logger import login, logout, login_by_session_id
+from instagram_logger import login, logout, login_by_session_id, upload_media
 from hadith import get_hadith
 # Read headlines from the file
 session_id_insta = open("sessionid.txt", 'r').read()
@@ -37,9 +37,13 @@ while True:
 
 hadith = add_newlines(hadith, 46)
 edit_image(hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
-bot = instagrapi.Client()
-#bot = login(username.strip(), password.strip())
-bot = login_by_session_id(session_id_insta)
-post = bot.photo_upload("output_image.jpg", f"{headline}")
-post = bot.photo_upload("output_hadith.jpg", f"{url}")
-#status = logout(bot=bot)
+try:
+    bot = login_by_session_id(session_id_insta)
+except:
+    bot = login(username.strip(), password.strip())
+
+post1 = upload_media("output_image.jpg", f"{headline}", bot)
+post2 = upload_media("output_hadith.jpg", f"{url}",bot)
+status = logout(bot=bot)
+print("output_hadith.jpg", f"{url}")
+print("output_image.jpg", f"{headline}")
