@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont 
-def edit_image(text, size, x, y, imagepath):
+def edit_image(text, size, x, y, imagepath, outputimage):
     # Load an image
     image = Image.open(imagepath)
 
@@ -19,4 +19,4 @@ def edit_image(text, size, x, y, imagepath):
     draw.text(position, text, fill="white", font=font)
 
     # Save the image with the text
-    image.save('output_image.jpg')
+    image.save(f'{outputimage}')
