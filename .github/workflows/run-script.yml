@@ -1,1 +1,27 @@
+name: Run Python Script Every 2 Hours (Windows)
 
+on:
+  schedule:
+    - cron: "0 */2 * * *"  # Runs every 2 hours (UTC time)
+  workflow_dispatch:  # Allows manual execution
+
+jobs:
+  run-script:
+    runs-on: windows-latest  # Uses Windows Server 2022
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Pulls the latest code from your repo
+
+      - name: Set Up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"  # Adjust Python version if needed
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Installs required Python packages
+
+      - name: Run Python Script
+        run: python main.py  # Executes your script
