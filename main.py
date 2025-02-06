@@ -2,7 +2,7 @@ from image_editor import edit_image
 from news import get_news
 import instagrapi
 from data_enhancer import add_newlines
-from instagram_logger import login
+from instagram_logger import login, logout
 # Read headlines from the file
 
 with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines_txt:
@@ -28,6 +28,6 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
 bot = instagrapi.Client()
 username = open("username.txt", "r")
 password = open("password.txt", 'r')
-login(username.read().strip(), password.read().strip())
+bot = login(username.read().strip(), password.read().strip())
 post = bot.photo_upload("output_image.jpg", f"{headline}")
-bot.logout()
+status = logout(bot=bot)
