@@ -4,6 +4,9 @@ import instagrapi
 from data_enhancer import add_newlines
 from instagram_logger import login, logout, login_by_session_id
 # Read headlines from the file
+session_id_insta = open("sessionid.txt", 'r').read()
+username = open("username.txt", "r").read()
+password = open("password.txt", 'r').read()
 news_api_key = open("newsapikey.txt", 'r').read()
 with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines_txt:
 
@@ -26,9 +29,7 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
         ind += 1
 
 bot = instagrapi.Client()
-username = open("username.txt", "r")
-password = open("password.txt", 'r')
-#bot = login(username.read().strip(), password.read().strip())
-bot = login_by_session_id("52416138425%3AkOglGMcWfjdiHp%3A25%3AAYdzvUj70YPkgtRjOsilN7pX3lWEtEVIXYf9EHrsoQ")
+#bot = login(username.strip(), password.strip())
+bot = login_by_session_id(session_id_insta)
 post = bot.photo_upload("output_image.jpg", f"{headline}")
 #status = logout(bot=bot)
