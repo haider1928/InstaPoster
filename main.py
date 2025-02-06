@@ -45,5 +45,3 @@ except:
 post1 = upload_media("output_image.jpg", f"{headline}", bot)
 post2 = upload_media("output_hadith.jpg", f"{url}",bot)
 status = logout(bot=bot)
-print("output_hadith.jpg", f"{url}")
-print("output_image.jpg", f"{headline}")

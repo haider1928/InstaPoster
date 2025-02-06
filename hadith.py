@@ -33,4 +33,4 @@ def get_hadith():
         print("No Hadith found. Check the URL or page range.")
 
 # Call the function to test it
-print(get_hadith())
+
