@@ -1,4 +1,4 @@
-name: Run Python Script Every 2 Hours (Windows)
+name: Upload one news and one Hadith Run Python Script Every 2 Hours (Windows)
 
 on:
   schedule:
