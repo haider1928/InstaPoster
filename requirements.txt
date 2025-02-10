@@ -2,3 +2,6 @@ instagrapi
 pillow
 newsapi-python
 bs4
+googletrans
+arabic-rashaper
+python-bidi

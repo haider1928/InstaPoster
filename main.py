@@ -1,6 +1,6 @@
 from image_editor import edit_image
 from news import getnews
-
+from translator import translate
 from data_enhancer import add_newlines
 from instagram_logger import login, logout, login_by_session_id, upload_media
 from hadith import get_hadith
@@ -35,8 +35,9 @@ while True:
     else:
         break
 
-hadith = add_newlines(hadith, 46)
-edit_image(hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
+
+urdu_hadith = add_newlines(translate(hadith), 60)
+edit_image(urdu_hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
 # bot, status = login_by_session_id(session_id_insta)
 # print(status)
 # if status is True:
@@ -45,5 +46,5 @@ edit_image(hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
 bot, status = login(username.strip(), password.strip())
 print(status)
 post1 = upload_media("output_image.jpg", f"{headline}", bot)
-post2 = upload_media("output_hadith.jpg", f"{url}",bot)
+post2 = upload_media("output_hadith.jpg", f"#{url}||{hadith}",bot)
 status = logout(bot=bot)
