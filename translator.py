@@ -11,5 +11,3 @@ def translate(text, src_lang='en', dest_lang='ur'):
     bidi_text = get_display(reshaped_text)
 
     return bidi_text
-
-
