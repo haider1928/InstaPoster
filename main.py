@@ -35,8 +35,8 @@ while True:
     else:
         break
 
-hadith = add_newlines(hadith, 46)
-edit_image(hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
+splitted_hadith = add_newlines(hadith, 46)
+edit_image(splitted_hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
 # bot, status = login_by_session_id(session_id_insta)
 # print(status)
 # if status is True:
