@@ -30,7 +30,7 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
         ind += 1
 while True:
     hadith, url = get_hadith()
-    if len(hadith) > 360:
+    if len(hadith) > 300:
         hadith, url = get_hadith()
     else:
         break
