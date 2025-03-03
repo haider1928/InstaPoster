@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-script:
-    runs-on: windows-latest  # Uses Windows Server 2022
+    runs-on: windows-2021  # Uses Windows Server 2022
 
     steps:
       - name: Checkout Repository
