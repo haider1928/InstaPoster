@@ -1,11 +1,8 @@
 from image_editor import edit_image
 from news import getnews
-
 from data_enhancer import add_newlines
-from instagram_logger import login, logout, login_by_session_id, upload_media
+from instagram_logger import login, logout, upload_media
 from hadith import get_hadith
-# Read headlines from the file
-session_id_insta = open("sessionid.txt", 'r').read()
 username = open("username.txt", "r").read()
 password = open("password.txt", 'r').read()
 news_api_key = open("newsapikey.txt", 'r').read()
