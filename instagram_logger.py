@@ -1,5 +1,5 @@
 import instagrapi
-from time import sleep
+
 def login(username, password):
 
 

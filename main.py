@@ -3,9 +3,7 @@ from news import getnews
 from data_enhancer import add_newlines
 from instagram_logger import login, logout, upload_media
 from hadith import get_hadith
-username = open("username.txt", "r").read()
-password = open("password.txt", 'r').read()
-news_api_key = open("newsapikey.txt", 'r').read()
+import config
 with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines_txt:
 
     existing_headlines = headlines_txt.read().splitlines()
@@ -13,7 +11,7 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
 
     # Fetch news and check if it's already in the file
     while True:
-        headline, description = getnews(ind, news_api_key)
+        headline, description = getnews(ind, config.newsapi)
         if headline is None:
             print("No more headlines available.")
             break
@@ -39,7 +37,7 @@ edit_image(splitted_hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
 # if status is True:
 #     pass
 # else:
-bot, status = login(username.strip(), password.strip())
+bot, status = login(config.username.strip(), config.password.strip())
 print(status)
 post1 = upload_media("output_image.jpg", f"{headline}", bot)
 post2 = upload_media("output_hadith.jpg", f"{hadith} ||| reference={url}",bot)
