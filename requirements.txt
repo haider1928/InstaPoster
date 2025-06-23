@@ -2,3 +2,4 @@ instagrapi
 pillow
 newsapi-python
 bs4
+dotenv
