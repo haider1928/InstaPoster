@@ -3,11 +3,7 @@ def getnews(index, apikey):
     newsapi = NewsApiClient(api_key=apikey)
 
     # Fetch top headlines
-    headlines = newsapi.get_top_headlines(q='pakistan',
-                                          
-                                          category='business',
-                                          language='en',
-                                          country='pk')
+    headlines = newsapi.get_top_headlines(q="Pakistan", sort_by="publishedAt", language="en")
 
     # Ensure the index is within bounds
     if index < len(headlines['articles']):
