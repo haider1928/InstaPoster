@@ -1,12 +1,20 @@
-from newsapi import NewsApiClient
-def getnews(index, apikey): 
-    newsapi = NewsApiClient(api_key=apikey)
+import requests
+import feedparser
+from bs4 import BeautifulSoup
 
-    # Fetch top headlines
-    headlines = newsapi.get_top_headlines(q="Pakistan")
+def getnews(count=5):
+    rss_url = "https://www.geo.tv/rss/1/0"
+    headers = {"User-Agent": "Mozilla/5.0"}
 
-    # Ensure the index is within bounds
-    if index < len(headlines['articles']):
-        return headlines['articles'][index]['title'], headlines['articles'][index]['description']
-    else:
-        return None, None
+    response = requests.get(rss_url, headers=headers)
+    feed = feedparser.parse(response.text)
+
+    headlines = []
+    descriptions = []
+
+    for entry in feed.entries[:count]:
+        headlines.append(entry.title)
+        desc_html = entry.get("description", "")
+        descriptions.append(BeautifulSoup(desc_html, "html.parser").text.strip())
+
+    return headlines, descriptions

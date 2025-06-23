@@ -11,7 +11,7 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
 
     # Fetch news and check if it's already in the file
     while True:
-        headline, description = getnews(ind, config.newsapi)
+        headline, description = getnews(ind)
         if headline is None:
             print("No more headlines available.")
             break
