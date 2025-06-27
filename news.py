@@ -1,20 +1,33 @@
 import requests
-import feedparser
 from bs4 import BeautifulSoup
 
-def getnews(count=5):
-    rss_url = "https://www.geo.tv/rss/1/0"
-    headers = {"User-Agent": "Mozilla/5.0"}
+def get_dawn_headlines():
+    url = "https://www.dawn.com/latest-news"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+    }
 
-    response = requests.get(rss_url, headers=headers)
-    feed = feedparser.parse(response.text)
+    res = requests.get(url, headers=headers)
+    soup = BeautifulSoup(res.text, 'html.parser')
 
     headlines = []
-    descriptions = []
+    stories = soup.select(".story")
 
-    for entry in feed.entries[:count]:
-        headlines.append(entry.title)
-        desc_html = entry.get("description", "")
-        descriptions.append(BeautifulSoup(desc_html, "html.parser").text.strip())
+    for story in stories:
+        title_tag = story.select_one(".story__title a")
+        desc_tag = story.select_one(".story__excerpt")
 
-    return headlines, descriptions
+        if title_tag and desc_tag:
+            title = title_tag.get_text(strip=True)
+            description = desc_tag.get_text(strip=True)
+            headlines.append({
+                'title': title,
+                'description': description
+            })
+
+    return headlines
+
+
+
+
+

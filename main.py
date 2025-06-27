@@ -1,5 +1,5 @@
 from image_editor import edit_image
-from news import getnews
+from news import get_dawn_headlines
 from data_enhancer import add_newlines
 from instagram_logger import login, logout, upload_media
 from hadith import get_hadith
@@ -11,11 +11,12 @@ with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines
 
     # Fetch news and check if it's already in the file
     while True:
-        headline, description = getnews(ind)
+        description = get_dawn_headlines()[ind]["description"]
+        headline = get_dawn_headlines()[ind]["title"]
         if headline is None:
             print("No more headlines available.")
             break
-        if headline not in existing_headlines and len(headline) <= 100:
+        elif headline not in existing_headlines and len(headline) <= 100:
             # Process and save the headline
             edit_image(headline, 35, 350, 1002, "your_image.jpg", "output_image.jpg")  # Headline editor
             edit_image("WRECK NEWS", 43, 15, 1000, "output_image.jpg", "output_image.jpg")
