@@ -1,7 +1,6 @@
-instagrapi
+instagrapi==1.17.6
 pillow
 newsapi-python
 bs4
-dotenv
-feedparser
+python-dotenv
 requests
