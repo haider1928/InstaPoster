@@ -1,0 +1,45 @@
+from image_editor import edit_image
+from news import get_dawn_headlines
+from data_enhancer import add_newlines
+from instagram_logger import login, logout, upload_media
+from hadith import get_hadith
+import config
+with open("headlines.txt", 'r+', encoding="utf-8", errors="ignore") as headlines_txt:
+
+    existing_headlines = headlines_txt.read().splitlines()
+    ind = 0
+
+    # Fetch news and check if it's already in the file
+    while True:
+        description = get_dawn_headlines()[ind]["description"]
+        headline = get_dawn_headlines()[ind]["title"]
+        if headline is None:
+            print("No more headlines available.")
+            break
+        elif headline not in existing_headlines and len(headline) <= 100:
+            # Process and save the headline
+            edit_image(headline, 35, 350, 1002, "your_image.jpg", "output_image.jpg")  # Headline editor
+            edit_image("WRECK NEWS", 43, 15, 1000, "output_image.jpg", "output_image.jpg")
+            edit_image(add_newlines(description or "No description available.", 40), 60, 340, 150, "output_image.jpg", "output_image.jpg")
+            headlines_txt.write(f"{headline}\n")
+            break
+        ind += 1
+while True:
+    hadith, url = get_hadith()
+    if len(hadith) > 300:
+        hadith, url = get_hadith()
+    else:
+        break
+
+splitted_hadith = add_newlines(hadith, 46)
+edit_image(splitted_hadith, 30, 20, 200, "hadith.jpg", "output_hadith.jpg")
+# bot, status = login_by_session_id(session_id_insta)
+# print(status)
+# if status is True:
+#     pass
+# else:
+bot, status = login(config.username.strip(), config.password.strip())
+print(status)
+post1 = upload_media("output_image.jpg", f"{headline}", bot)
+post2 = upload_media("output_hadith.jpg", f"{hadith} ||| reference={url}",bot)
+status = logout(bot=bot)
