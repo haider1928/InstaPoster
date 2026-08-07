@@ -1,4 +1,4 @@
-﻿# Local environment and secrets
+# Local environment and secrets
 .env
 .env.*
 .venv/

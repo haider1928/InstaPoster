@@ -1,5 +1,6 @@
-instagrapi==1.17.6
-Pillow==9.5.0
-requests==2.31.0
-beautifulsoup4==4.12.2
-python-dotenv==1.0.1
+instagrapi==2.18.12
+pillow==12.3.0
+newsapi-python==0.2.7
+beautifulsoup4==4.15.0
+python-dotenv==1.2.2
+requests==2.34.2
