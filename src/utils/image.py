@@ -19,7 +19,8 @@ class ImageEditor:
         """Wraps text intelligently to a specific width without breaking words mid-stream."""
         if not text:
             return ""
-        return "\n\n".join(textwrap.wrap(text, width=width))
+        lines = textwrap.wrap(text, width=width)
+        return "\n".join(lines)
 
     @staticmethod
     def add_text_to_image(
@@ -27,7 +28,7 @@ class ImageEditor:
         output_path: Path,
         texts_to_add: list[dict],
         save: bool = True
-    ) -> Image.Image | None:
+    ) -> bool:
         """
         Adds multiple text elements to an image.
         
@@ -40,7 +41,7 @@ class ImageEditor:
         try:
             if not image_path.exists():
                 logger.error(f"Image not found: {image_path}")
-                return None
+                return False
 
             image = Image.open(image_path)
             draw = ImageDraw.Draw(image)
@@ -53,16 +54,16 @@ class ImageEditor:
                     text_content = ImageEditor.wrap_text(text_content, wrap_width)
 
                 font = ImageEditor._get_font(item.get("size", 30))
-                # ImageDraw text typically takes a tuple for x, y
                 position = (item.get("x", 0), item.get("y", 0))
                 
                 draw.text(position, text_content, fill="white", font=font)
 
             if save:
+                output_path.parent.mkdir(parents=True, exist_ok=True)
                 image.save(output_path)
                 logger.info(f"Image saved to {output_path.name}")
                 
-            return image
+            return True
         except Exception as e:
             logger.error(f"Failed to edit image: {e}")
-            return None
+            return False

@@ -1,6 +1,5 @@
 instagrapi==1.17.6
-pillow
-newsapi-python
-bs4
-python-dotenv
-requests
+Pillow==9.5.0
+requests==2.31.0
+beautifulsoup4==4.12.2
+python-dotenv==1.0.1

@@ -1,53 +1,41 @@
-# InstaPoster
+InstaPoster automatically fetches public news headlines and authentic hadiths, renders them onto images, and posts them to an Instagram account. It combines simple web scraping, image rendering, and Instagram publishing in a small Python pipeline.
 
-InstaPoster is an automated Instagram poster application that fetches news headlines from Dawn, retrieves authentic Hadiths from `sunnah.com`, intelligently writes the content onto base images using Python Imaging Library (Pillow), and systematically publishes them online.
+Open InstaPoster and it looks for the latest news and short religious texts on the web. It chooses a short item that has not been posted before and prepares it for sharing.
 
-## Architecture
+![home screen](screenshots/home_screen.png)
 
-This project strictly follows Software Engineering Best Practices, separating functionality into modular components for high readability, maintainability, and scalability.
+The program writes the chosen words onto a background image so they appear like a shareable post. It saves the image and then sends the image to the connected Instagram account.
 
-```text
-InstaPoster/
-├── .env                  # Environment Variables (keep secret)
-├── .env.example          # Template for credentials setup
-├── README.md             # The current documentation
-├── requirements.txt      # Dependency configurations
-├── assets/               # Folder storing graphical templates
-│   ├── hadith.jpg          
-│   └── your_image.jpg      
-├── data/                 # Dynamic logfiles or DB persistence
-│   └── headlines.txt       
-├── output/               # Generative outputs prior to uploading
-└── src/                  # The root package execution environment
-    ├── config.py         # Application level variable storage
-    ├── main.py           # Core algorithmic pipeline entrypoint
-    ├── services/         # Interactions interacting over the network
-    │   ├── hadith.py       
-    │   ├── instagram.py    
-    │   └── news.py         
-    └── utils/            # Data-structures and utility functionality
-        ├── image.py        
-        └── logger.py       
-```
+![post preview](screenshots/post_preview.png)
 
-## Features
+If the post goes up successfully the program records the headline so it does not post it again. If something goes wrong it writes a helpful message so a person can fix the problem.
 
-- **Automated Logging System:** Integrated `logging` implementation ensuring robust tracing.
-- **Fail-Safe HTTP Handlers:** Integrates generic connection error management avoiding silent crashes.
-- **Pillow Data Enhancer:** Algorithm dynamically splits long strings onto graphics via width-wrapping heuristics to preserve contextual word readability.
-- **Dynamic Content Discovery:** Identifies duplication states explicitly, ensuring the stream only generates fresh unique headlines.
+![cli success](screenshots/cli_success.png)
 
-## Installation
+Tech stack:
+- Python (3.10+ recommended)
+- Pillow for image manipulation
+- requests + BeautifulSoup4 for web scraping
+- instagrapi for Instagram publishing
+- python-dotenv for environment variable loading
 
-1. Construct the pipeline dependencies locally via:
-```bash
-pip install -r requirements.txt
-```
+Project layout:
+- src/: source code
+  - src/main.py: pipeline entry point
+  - src/config.py: path and environment handling
+  - src/services/: scraping and external services
+  - src/utils/: image and logging utilities
+- assets/: image templates used as backgrounds
+- data/: runtime files (headlines log)
+- output/: generated images
 
-2. Establish `.env` variables via the schema specified in `.env.example`.
+Install and run:
+1. Create and activate a virtual environment (optional but recommended).
+2. Install dependencies:
+   pip install -r requirements.txt
+3. Copy .env.example to .env and set the required environment variables (instagram_username, instagram_password, newsapi if used).
+4. Run the pipeline:
+   python -m src.main
 
-## Execution Process
-
-```bash
-python -m src.main
-```
+Configuration:
+- Credentials and API keys must go into .env and must not be committed. The script reads instagram_username and instagram_password from environment variables.

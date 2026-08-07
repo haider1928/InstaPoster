@@ -10,4 +10,5 @@ def get_logger(name: str) -> logging.Logger:
             '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         ))
         logger.addHandler(handler)
+    logger.propagate = False
     return logger
