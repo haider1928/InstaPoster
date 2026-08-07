@@ -6,6 +6,10 @@ from src.utils.logger import get_logger
 logger = get_logger(__name__)
 
 class HadithService:
+    HEADERS = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
+    }
+
     @staticmethod
     def get_hadith(max_length: int = 300, max_retries: int = 5) -> tuple[str, str]:
         """
@@ -25,7 +29,7 @@ class HadithService:
             url = f"https://sunnah.com/{collection}/{page}"
             
             try:
-                response = requests.get(url, timeout=10)
+                response = requests.get(url, headers=HadithService.HEADERS, timeout=10)
                 if response.status_code != 200:
                     continue
                     
