@@ -1,5 +1,9 @@
-InstaPoster is a small Python tool that creates Instagram-ready images from live headlines and Hadith text. It can also post the generated images to an Instagram account if credentials are provided.
+# InstaPoster
 
-This tool fetches a news headline and a Hadith sentence from the web. It writes each piece of text onto a background image and saves the results in the output folder. If you configure Instagram credentials, it can upload the generated pictures automatically. If you only want to check the image generation, run the tool in dry-run mode.
+InstaPoster is a Python application that takes a current news headline and a Hadith quote, places them on image templates, and saves the results in the output folder. When Instagram credentials are set up in a `.env` file, it can also upload the created images to an account.
 
-Python 3.14 is used for this project. The package reads settings from the `.env` file, loads news via a web scrape or NewsAPI if a key is provided, builds images with Pillow, and uses instagrapi for Instagram posting. The repository keeps source files in `src/`, image templates in `assets/`, and output images in `output/`. Install the dependencies with `python -m pip install -r requirements.txt`, then run `python main.py --dry-run` to generate images without posting or `python main.py` after adding Instagram credentials in `.env`.
+The application fetches a news headline and a Hadith entry from online sources, then writes the text onto prepared background images. It keeps track of headlines that have already been used so it does not repeat the same story.
+
+The code base is organized with the program entry point and configuration under `src`, image templates under `assets`, and generated images under `output`. The project uses Python 3.14 and depends on libraries listed in `requirements.txt`.
+
+To prepare the project, install dependencies with `python -m pip install -r requirements.txt` and create a `.env` file from `.env.example`. Use `python main.py --dry-run` to generate images without posting them, and use `python main.py` once Instagram credentials are configured for optional upload.
